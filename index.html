@@ -1,0 +1,117 @@
+---
+---
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>UNC ASDA</title>
+	<link rel="stylesheet" href="assets/css/styles.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+	<link rel="icon" href="assets/img/favicon.ico" sizes="any">
+</head>
+<body>
+
+	<div data-include="header"></div>
+	
+	<main>
+		<section class="hero">
+			<video autoplay muted loop playsinline webkit-playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate nofullscreen noremoteplayback" id="background-video">
+				<source src="assets/video/asod vid.mp4" type="video/mp4">
+				Your browser does not support the video tag.
+			</video>
+			<div class="hero-overlay"></div>
+			<div class="hero-content">
+				<h1>Welcome to UNC ASDA</h1>
+				<p>Empowering future dental professionals through leadership, advocacy, and service</p>
+				<!-- <a href="about.html" class="cta-button">Learn More</a> -->
+			</div>
+		</section>
+
+		<section class="chapter-intro" aria-labelledby="chapter-intro-heading">
+			<div class="chapter-intro__inner">
+				<h2 id="chapter-intro-heading">We are the UNC Chapter of the American Student Dental Association at the Adams School of Dentistry.</h2>
+				<p class="lead">
+					The American Student Dental Association (ASDA) is a national, student-led organization that protects and advances the rights, interests, and well-being of dental students. It connects students with organized dentistry and provides education, resources, representation, and advocacy.
+				</p>
+				<p class="lead">
+					For more than 75 years, the UNC Adams School of Dentistry has prepared outstanding oral health professionals for North Carolina and beyond.
+				</p>
+				<p class="lead">
+					At UNC ASDA, we bring that mission to life by fostering leadership, service, community, and professional development to create the best possible dental school experience for our members.
+				</p>
+			</div>
+		</section>
+
+		<section class="gallery" aria-labelledby="gallery-heading">
+			<div class="gallery__inner">
+				<!-- <h2 id="gallery-heading" class="sr-only">Photo Gallery</h2> -->
+
+				<button class="gallery__btn gallery__btn--prev" aria-label="Previous image">
+					<span class="arrow">‹</span>
+				</button>
+				<div class="gallery__track" id="gallery-track">
+					<!-- Slides will be injected here -->
+				</div>
+				<button class="gallery__btn gallery__btn--next" aria-label="Next image">
+					<span class="arrow">›</span>
+				</button>
+			</div>
+
+			<!-- <div class="gallery__dots" id="gallery-dots" aria-label="Gallery pagination"></div> -->
+			<div id="gallery-source" style="display:none;">
+<!-- 				<img src="assets/img/gallery/Atrium_lunchtime.jpg">
+				<img src="assets/img/gallery/simlab003.jpg">
+				<img src="assets/img/gallery/simlab004.jpg">
+				<img src="assets/img/gallery/simlab005.jpg">
+				<img src="assets/img/gallery/simlab006.jpg">
+				<img src="assets/img/gallery/simlab007.jpg">
+ -->
+				
+
+
+ 				<div id="gallery-source" style="display:none;">
+					{% assign pics = site.static_files | where_exp: "f", "f.path contains '/assets/img/gallery/'" %}
+					{% for f in pics %}
+						{% assign n = f.extname | downcase %}
+						{% if n == ".jpg" or n == ".jpeg" or n == ".png" or n == ".webp" or n == ".gif" or n == ".avif" %}
+							<img src="{{ f.path | relative_url }}" alt="">
+						{% endif %}
+					{% endfor %}
+				</div>		
+
+			</div>
+		</section>
+
+
+<!-- 		<section class="features">
+			<div class="feature-card">
+				<i class="fas fa-calendar-alt"></i>
+				<h3>Upcoming Events</h3>
+				<p>Stay updated with our latest events and activities</p>
+				<a href="events.html">View Events</a>
+			</div>
+			<div class="feature-card">
+				<i class="fas fa-graduation-cap"></i>
+				<h3>Professional Development</h3>
+				<p>Access resources for your dental career growth</p>
+				<a href="resources.html">Explore Resources</a>
+			</div>
+			<div class="feature-card">
+				<i class="fas fa-handshake"></i>
+				<h3>Get Involved</h3>
+				<p>Join our community and make a difference</p>
+				<a href="contact.html">Contact Us</a>
+			</div>
+		</section>
+ -->
+	</main>
+
+	<div data-include="footer"></div>
+
+	<script src="assets/js/include.js"></script>
+</body>
+</html> 
