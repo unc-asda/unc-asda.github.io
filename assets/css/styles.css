@@ -142,8 +142,8 @@ video::-webkit-media-controls-picture-in-picture-button { display: none; }
   transform: translateY(-3px);  /* try -2px if still a hair low */
 }
 
-.gallery__btn--prev{ left:0; }
-.gallery__btn--next{ right:0; }
+.gallery__btn--prev{ left:20px; }
+.gallery__btn--next{ right:20px; }
 .gallery__btn:hover{ background:#f8f9fb; }
 @media (prefers-reduced-motion: reduce) { .gallery__track { scroll-behavior: auto; } }
 
