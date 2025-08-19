@@ -153,13 +153,14 @@ video::-webkit-media-controls-picture-in-picture-button { display: none; }
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
 
-/* Safari-safe sizing for gallery cards */
+/* Safari-safe gallery sizing */
 .gallery__slide{
-  /* make each card a fixed-width flex item */
+  /* give the flex item a real width */
   flex: 0 0 clamp(260px, 40vw, 360px);
-  /* control height via aspect ratio instead of explicit height */
+  width: clamp(260px, 40vw, 360px);   /* belt + suspenders for Safari */
+  /* and control height via aspect ratio */
   aspect-ratio: 4 / 3;
-  height: auto !important;   /* override the old height: clamp(...) */
+  height: auto !important;            /* override the old height clamp */
 }
 
 /* keep images filling the card */
