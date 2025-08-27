@@ -170,3 +170,93 @@ video::-webkit-media-controls-picture-in-picture-button { display: none; }
   object-fit: cover;
   display: block;
 }
+
+.exec-blurb {
+    margin: 0 0 0.35rem 0;
+    font-size: 0.95rem;
+    opacity: 0.95;
+}
+
+.exec-section {
+    max-width: 1200px;   /* control content width */
+    margin-inline: auto; /* center horizontally */
+    padding: 3rem 1rem;  /* breathing room */
+}
+
+.exec-title {
+    text-align: center;
+    margin: 0 0 2rem;
+}
+
+
+/* Exec grid layout */
+
+:root {
+    /* Tweak this to change card/image size */
+    --exec-card-min: 320px; /* try 280–360px */
+}
+
+.exec-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(var(--exec-card-min), var(--exec-card-min)));
+    gap: 1.75rem;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+@media (min-width: 640px) {
+    .exec-grid { grid-template-columns: repeat(2, 1fr); }  /* 2 cols on small/med */
+}
+@media (min-width: 1024px) {
+    .exec-grid { grid-template-columns: repeat(3, 1fr); }  /* 3 cols on large */
+}
+
+/* Card & image sizing/cropping */
+.exec-card { /* optional: ensure <li> acts like a block card */ }
+
+.exec-figure {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    aspect-ratio: 5 / 6;                  /* consistent portrait shape */
+}
+
+.exec-figure img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;                     /* crop to fill the frame */
+    object-position: center;               /* center faces; tweak if needed */
+    transition: transform 0.6s ease;
+}
+
+/* Hover zoom (optional, looks nice) */
+.exec-card:hover .exec-figure img,
+.exec-card:focus-within .exec-figure img {
+    transform: scale(1.06);
+}
+
+/* Caption overlay you already have should remain */
+.exec-caption {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0.25rem;
+    padding: 1rem;
+    color: #fff;
+    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.75) 40%, rgba(0,0,0,0.75) 65%);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    pointer-events: none;
+}
+.exec-card:hover .exec-caption,
+.exec-card:focus-within .exec-caption,
+.exec-card.open .exec-caption {
+    opacity: 1;
+    transform: translateY(0);
+}
