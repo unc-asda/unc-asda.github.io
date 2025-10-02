@@ -22,7 +22,7 @@ nav {
 .hamburger span { display: block; width: 25px; height: 3px; background: #2c3e50; margin: 5px 0; transition: .3s; }
 
 /* Layout */
-main { padding-top: 80px; }
+main { padding-top: 75px; }
 
 /* Hero */
 .hero {
@@ -193,7 +193,7 @@ video::-webkit-media-controls-picture-in-picture-button { display: none; }
 
 :root {
     /* Tweak this to change card/image size */
-    --exec-card-min: 320px; /* try 280–360px */
+    --exec-card-min: 300px; /* try 280–360px */
 }
 
 .exec-grid {
@@ -205,13 +205,13 @@ video::-webkit-media-controls-picture-in-picture-button { display: none; }
     margin: 0;
     padding: 0;
 }
-@media (min-width: 640px) {
-    .exec-grid { grid-template-columns: repeat(2, 1fr); }  /* 2 cols on small/med */
+/*@media (min-width: 640px) {
+    .exec-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (min-width: 1024px) {
-    .exec-grid { grid-template-columns: repeat(3, 1fr); }  /* 3 cols on large */
+    .exec-grid { grid-template-columns: repeat(3, 1fr); }
 }
-
+*/
 /* Card & image sizing/cropping */
 .exec-card { /* optional: ensure <li> acts like a block card */ }
 
@@ -235,14 +235,17 @@ video::-webkit-media-controls-picture-in-picture-button { display: none; }
 /* Hover zoom (optional, looks nice) */
 .exec-card:hover .exec-figure img,
 .exec-card:focus-within .exec-figure img {
-    transform: scale(1.06);
+/*    transform: scale(1.06);*/
 }
 
 
 /* Caption overlay you already have should remain */
 .exec-caption {
     position: absolute;
-    inset: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -251,13 +254,58 @@ video::-webkit-media-controls-picture-in-picture-button { display: none; }
     color: #fff;
     background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.75) 40%, rgba(0,0,0,0.75) 65%);
     opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.35s ease, transform 0.35s ease;
+/*    transform: translateY(10px);*/
+/*    transition: opacity 0.35s ease, transform 0.35s ease;*/
+    transition: opacity 0.35s ease;
+/*    top: auto;                     */
+/*    max-height: 100%;                 */
     pointer-events: none;
+
+
 }
 .exec-card:hover .exec-caption,
 .exec-card:focus-within .exec-caption,
 .exec-card.open .exec-caption {
     opacity: 1;
     transform: translateY(0);
+    pointer-events: auto;            /* <- makes the overlay scrollable */
+
+}
+
+.exec-figure .exec-caption {
+  font-size: 0.8rem;      /* try 0.85–0.95rem */
+  line-height: 1.35;
+}
+
+.exec-caption .exec-name {
+  font-size: 1rem;
+}
+
+.events-calendar {
+  text-align: center;
+  margin-top: 30px;
+}
+
+
+.lead.lead--emph {
+  font-size: clamp(1.2rem, 2vw, 1.35rem);
+  font-weight: 700;
+  font-style: italic;
+}
+
+.features[aria-label="Contact options"] {
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+.feature-card .social-links {
+  display: flex;              /* you already have flex—this just reaffirms it */
+  justify-content: center;    /* horizontally center the icons */
+  align-items: center;        /* vertical centering if you size the buttons */
+  gap: 0.75rem;               /* spacing between icons */
+}
+
+.feature-card--email a[href^="mailto:"] {
+  font-size: 1.15rem;
+  font-weight: 700;
 }

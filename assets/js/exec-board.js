@@ -58,25 +58,35 @@
 		const caption = document.createElement("figcaption");
 		caption.className = "exec-caption";
 
-		const h3 = document.createElement("h3");
+		const h3 = document.createElement("p");
 		h3.className = "exec-name";
-		h3.textContent = Name;
+		h3.innerHTML = `<strong>${Name.trim()}</strong>`;
 
 		if (Classyear && Classyear.trim()) {
-			const p = document.createElement("p");
-			p.className = "exec-year";
-			p.textContent = `Class of ${Classyear.trim()}`;
-			caption.appendChild(p);
+			const yr = document.createElement("span");
+			yr.className = "exec-year";
+			yr.innerHTML = `<em>c/o ${Classyear.trim()}</em>`;
+			// caption.appendChild(p);
+			h3.appendChild(document.createTextNode(" ")); // space before year
+			h3.appendChild(yr);
 		}
 
-		const roleP = document.createElement("p");
-		roleP.className = "exec-role";
-		roleP.textContent = Role || "";
+		// const roleP = document.createElement("p");
+		// roleP.className = "exec-role";
+		// roleP.textContent = Role || "";
+
+		if (Role && Role.trim()) {
+			const roleP = document.createElement("p");
+			roleP.className = "exec-role";
+			roleP.innerHTML = `<strong><em>${Role.trim()}</em></strong>`;
+			caption.appendChild(roleP);
+		}
 
 		if (Hometown && Hometown.trim()) {
 			const p = document.createElement("p");
 			p.className = "exec-hometown";
-			p.textContent = `Hometown: ${Hometown.trim()}`;
+			// p.textContent = `Hometown: ${Hometown.trim()}`;
+			p.innerHTML = `<strong><em>Hometown:</em></strong>&nbsp;&nbsp;&nbsp;&#8203;${safeHTML(Hometown.trim())}`;
 			caption.appendChild(p);
 		}
 
@@ -84,7 +94,7 @@
 		if (Quote && Quote.trim()) {
 			const p = document.createElement("p");
 			p.className = "exec-quote";
-			p.textContent = `Favorite quote: ${Quote.trim()}`;
+			p.innerHTML = `<strong><em>Favorite Quote:</em></strong>&nbsp;&nbsp;&nbsp;&#8203;${Quote.trim()}`;
 			caption.appendChild(p);
 		}
 
@@ -92,11 +102,11 @@
 		if (Memory && Memory.trim()) {
 			const p = document.createElement("p");
 			p.className = "exec-memory";
-			p.textContent = `Favorite dental school memory: ${Memory.trim()}`;
+			p.innerHTML = `<strong><em>Favorite Dental School Memory:</em></strong>&nbsp;&nbsp;&nbsp;&#8203;${Memory.trim()}`;
 			caption.appendChild(p);
 		}
 
-		caption.prepend(roleP);
+		// caption.prepend(roleP);
 		caption.prepend(h3);
 
 		figure.appendChild(img);
