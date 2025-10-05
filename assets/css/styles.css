@@ -309,3 +309,85 @@ video::-webkit-media-controls-picture-in-picture-button { display: none; }
   font-size: 1.15rem;
   font-weight: 700;
 }
+
+.obvious-link {
+  color: #3498db;              /* your accent color */
+  text-decoration: underline;  /* always underline */
+  font-weight: 700;            /* bold */
+  text-underline-offset: 3px;  /* nicer underline */
+}
+.obvious-link:hover { text-decoration-thickness: 3px; }
+
+/* Ensure the dropdown anchors to the bar */
+header nav { position: relative; }
+
+/* DESKTOP (>=769px): show inline links exactly as before; hide hamburger */
+@media (min-width: 769px) {
+  .nav-links {
+    display: block;            /* keep your original inline flow */
+    position: static;          /* undo the mobile absolute dropdown */
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  /* restore your original spacing & prevent wrapping */
+  .nav-links a { 
+    margin-left: 2rem;         /* your old spacing */
+    white-space: nowrap;       /* stop words from breaking to a new line */
+  }
+  .nav-links a:first-child { margin-left: 0; }
+
+  .hamburger { display: none; }  /* only mobile shows hamburger */
+}
+
+/* MOBILE (<=768px): hide links until toggled; show hamburger */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+    z-index: 1001;
+  }
+  .nav-links.active { display: block; }
+  .nav-links a { display: block; padding: .35rem 0; margin: 0; } /* comfy vertical list */
+
+  .hamburger { display: block; cursor: pointer; background: none; border: 0; padding: .25rem; }
+  .hamburger span {
+    display: block; width: 25px; height: 3px; background: #2c3e50; margin: 5px 0; transition: .3s;
+  }
+}
+
+/* Optional: animate hamburger to X when open */
+.hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+
+/* Center the calendar and control widths */
+.events-calendar {
+  text-align: center;
+  margin-top: 30px;          /* push below fixed header */
+}
+/*.events-calendar .calendar-desktop,
+.events-calendar .calendar-mobile {
+  width: min(100%, 900px);
+  margin: 0 auto;
+}
+*/
+/* Show desktop calendar by default; hide mobile one */
+.calendar-desktop { display: block; }
+.calendar-mobile  { display: none; }
+
+/* Only on mobile, swap them */
+@media (max-width: 768px) {
+  .calendar-desktop { display: none; }
+  .calendar-mobile  { display: block; }
+  /* optional: make the mobile iframe a bit shorter */
+  .calendar-mobile iframe { height: 520px; }
+}
