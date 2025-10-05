@@ -15,7 +15,12 @@
 
 		<section class="exec-section">
 			<div class="container">
-				<h1 class="exec-title">Meet the Executive Board</h1>
+				<h1 class="exec-title" style="margin-bottom:0;">Meet the Executive Board</h1>
+				<p class="exec-hint" style="text-align: center; padding-top:0; padding-bottom:1rem;">
+					<span class="hint-hover">Hover over</span>
+					<span class="hint-tap">Tap</span>
+					a photo to read the member's bio.
+				</p>
 				<ul class="exec-grid" id="exec-grid"></ul>
 			</div>
 		</section>
@@ -34,5 +39,25 @@
 	<script src="assets/js/exec-board.js" defer></script>
 	<script src="assets/js/include.js"></script>
 	<script src="assets/js/mobile-menu.js" defer></script>
+	<script>
+	(function(){
+		if (sessionStorage.getItem('execPeekDone')) return;
+		const grid = document.getElementById('exec-grid');
+		if (!grid) return;
+
+		// wait until cards are injected
+		const obs = new MutationObserver(() => {
+			const first = grid.querySelector('.exec-card');
+			if (!first) return;
+			obs.disconnect();
+			first.classList.add('open');
+			setTimeout(()=> {
+				first.classList.remove('open');
+				sessionStorage.setItem('execPeekDone','1');
+			}, 1600);
+		});
+		obs.observe(grid, { childList:true });
+	})();
+	</script>
 </body>
 </html>

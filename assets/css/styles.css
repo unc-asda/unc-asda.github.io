@@ -391,3 +391,18 @@ header nav { position: relative; }
   /* optional: make the mobile iframe a bit shorter */
   .calendar-mobile iframe { height: 520px; }
 }
+
+
+/* default: desktop/laptop */
+.exec-hint .hint-hover { display: inline; }
+.exec-hint .hint-tap   { display: none; }
+
+/* on touch/mobile devices */
+@media (hover: none), (pointer: coarse) {
+  .exec-hint .hint-hover { display: none; }
+  .exec-hint .hint-tap   { display: inline; }
+}
+
+
+
+
