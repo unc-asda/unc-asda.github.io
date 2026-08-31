@@ -15,6 +15,27 @@
 		return `${HEADSHOTS_DIR}/${encodeURIComponent(filename)}`;
 	}
 
+	// Shown when a member has no headshot on file yet. Drawn inline (no extra
+	// file to upload) at the same 5:6 portrait shape as the card frame.
+	const PLACEHOLDER_SVG = `
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 600" role="img">
+			<defs>
+				<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+					<stop offset="0%" stop-color="#eef3f7"/>
+					<stop offset="100%" stop-color="#dbe4ec"/>
+				</linearGradient>
+			</defs>
+			<rect width="500" height="600" fill="url(#bg)"/>
+			<g fill="#2c3e50" opacity="0.22">
+				<circle cx="250" cy="248" r="90"/>
+				<path d="M70 600c0-107 80-186 180-186s180 79 180 186z"/>
+			</g>
+		</svg>`;
+
+	const PLACEHOLDER_SRC =
+		"data:image/svg+xml;charset=utf-8," +
+		encodeURIComponent(PLACEHOLDER_SVG.trim().replace(/\s+/g, " "));
+
 	function attachHeadshotFallback(imgEl, name) {
 		let idx = 0;
 		imgEl.src = encodeHeadshotPath(name, EXT_FALLBACKS[idx]);
@@ -24,11 +45,10 @@
 			if (idx < EXT_FALLBACKS.length) {
 				imgEl.src = encodeHeadshotPath(name, EXT_FALLBACKS[idx]);
 			} else {
-				// Optional: last-resort placeholder (transparent pixel)
+				// No photo on file — fall back to the silhouette placeholder.
 				imgEl.onerror = null;
-				imgEl.src =
-					"data:image/gif;base64,R0lGODlhAQABAAAAACw=";
-				imgEl.alt = `${name} headshot not available`;
+				imgEl.src = PLACEHOLDER_SRC;
+				imgEl.alt = `${name} — photo coming soon`;
 			}
 		};
 	}
@@ -42,7 +62,7 @@
 			.replace(/'/g, "&#39;");
 	}
 
-	function createCard({ Name, Role, Hometown, Classyear, Quote, Memory }) {
+	function createCard({ Name, Role, Hometown, Undergrad, Classyear, Quote, Memory }) {
 		const li = document.createElement("li");
 		li.className = "exec-card";
 
@@ -90,6 +110,14 @@
 			caption.appendChild(p);
 		}
 
+		// Undergrad institution
+		if (Undergrad && Undergrad.trim()) {
+			const p = document.createElement("p");
+			p.className = "exec-undergrad";
+			p.innerHTML = `<strong><em>Undergrad:</em></strong>&nbsp;&nbsp;&nbsp;&#8203;${safeHTML(Undergrad.trim())}`;
+			caption.appendChild(p);
+		}
+
 		// Quote
 		if (Quote && Quote.trim()) {
 			const p = document.createElement("p");
@@ -130,6 +158,7 @@
 				Name: row.Name?.trim() || "",
 				Role: row.Role?.trim() || "",
 				Hometown: row.Hometown?.trim() || "",
+				Undergrad: row.Undergrad?.trim() || "",
 				Classyear: row.Classyear?.trim() || "",
 				Quote: row.Quote?.trim() || "",
 				Memory: row.Memory?.trim() || ""
