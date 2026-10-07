@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>UNC ASDA | Gallery</title>
+	<link rel="stylesheet" href="assets/css/styles.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+	<link rel="icon" href="assets/img/favicon.ico" sizes="any">
+	<style>
+		.pg-section { max-width: 1200px; margin-inline: auto; padding: 2.5rem 5% 3rem; }
+		.pg-title { font-size: 2.2rem; color: #2c3e50; text-align: center; line-height: 1.2; }
+		.pg-sub { text-align: center; color: #5b6b7a; margin: .5rem 0 1.75rem; }
+		.pg-filters { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; margin-bottom: 1.5rem; }
+		.pg-filters button { font: inherit; font-size: .9rem; font-weight: 500; padding: .45rem 1rem; border-radius: 999px; border: 1px solid #2c3e50; background: #fff; color: #2c3e50; cursor: pointer; }
+		.pg-filters button[aria-pressed="true"] { background: #2c3e50; color: #fff; }
+		.pg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; list-style: none; }
+		.pg-tile { position: relative; aspect-ratio: 4 / 3; border-radius: 8px; overflow: hidden; background: linear-gradient(110deg, #eef3f7 30%, #dbe4ec 50%, #eef3f7 70%); background-size: 200% 100%; animation: pg-shimmer 1.4s linear infinite; }
+		.pg-tile.loaded { animation: none; background: #eef3f7; }
+		.pg-tile button { all: unset; display: block; width: 100%; height: 100%; cursor: zoom-in; }
+		.pg-tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .25s ease; }
+		.pg-tile:hover img { transform: scale(1.04); }
+		@keyframes pg-shimmer { to { background-position: -200% 0; } }
+		.pg-msg { text-align: center; color: #5b6b7a; padding: 2rem 0; }
+		.pg-lightbox { position: fixed; inset: 0; z-index: 2000; background: rgba(20, 28, 36, .94); display: none; align-items: center; justify-content: center; }
+		.pg-lightbox.open { display: flex; }
+		.pg-lightbox img { max-width: 92vw; max-height: 86vh; object-fit: contain; border-radius: 4px; }
+		.pg-lightbox button { position: absolute; background: none; border: 0; color: #fff; font-size: 2rem; cursor: pointer; padding: .75rem 1rem; line-height: 1; opacity: .85; }
+		.pg-lightbox button:hover { opacity: 1; }
+		.pg-close { top: .5rem; right: .75rem; }
+		.pg-prev { left: .5rem; top: 50%; transform: translateY(-50%); }
+		.pg-next { right: .5rem; top: 50%; transform: translateY(-50%); }
+		@media (max-width: 768px) {
+			.pg-title { font-size: 1.7rem; }
+			.pg-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			.pg-tile { animation: none; }
+			.pg-tile img { transition: none; }
+		}
+	</style>
+</head>
+<body>
+	<div data-include="header"></div>
+	<main>
+		<section class="pg-section">
+			<h1 class="pg-title">Photo Gallery</h1>
+			<p class="pg-sub">Moments from UNC ASDA events and community.</p>
+			<div class="pg-filters" id="pg-filters" hidden></div>
+			<ul class="pg-grid" id="pg-grid"></ul>
+			<p class="pg-msg" id="pg-msg">Loading photos...</p>
+		</section>
+	</main>
+	<div class="pg-lightbox" id="pg-lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+		<button class="pg-close" aria-label="Close">&times;</button>
+		<button class="pg-prev" aria-label="Previous photo">&#8249;</button>
+		<img id="pg-lightbox-img" alt="">
+		<button class="pg-next" aria-label="Next photo">&#8250;</button>
+	</div>
+	<div data-include="footer"></div>
+	<script src="assets/js/gallery.js" defer></script>
+	<script src="assets/js/include.js"></script>
+	<script src="assets/js/mobile-menu.js" defer></script>
+</body>
+</html>
