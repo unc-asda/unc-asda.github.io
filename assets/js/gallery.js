@@ -9,6 +9,7 @@
 	var filters = document.getElementById('pg-filters');
 	var box = document.getElementById('pg-lightbox');
 	var boxImg = document.getElementById('pg-lightbox-img');
+	var boxCap = document.getElementById('pg-lightbox-cap');
 
 	var photos = [];
 	var visible = [];
@@ -83,8 +84,18 @@
 			var b = document.createElement('button');
 			b.setAttribute('aria-label', 'Open photo ' + (i + 1));
 			var img = document.createElement('img');
-			img.alt = 'UNC ASDA photo';
+			img.alt = p.c || 'UNC ASDA photo';
 			b.appendChild(img);
+			var zoom = document.createElement('span');
+			zoom.className = 'pg-zoom';
+			zoom.innerHTML = '<i class="fa-solid fa-magnifying-glass-plus" aria-hidden="true"></i>';
+			b.appendChild(zoom);
+			if (p.c) {
+				var cap = document.createElement('span');
+				cap.className = 'pg-cap';
+				cap.textContent = p.c;
+				b.appendChild(cap);
+			}
 			b.addEventListener('click', function () { openBox(i); });
 			li.appendChild(b);
 			grid.appendChild(li);
@@ -127,6 +138,7 @@
 		var p = visible[current];
 		var token = p.id;
 		boxImg.dataset.id = token;
+		boxCap.textContent = p.c || '';
 		var small = cache[p.id + 'small'];
 		boxImg.src = small || '';
 		loadImage(p.id, 'large').then(function (src) {
@@ -143,6 +155,7 @@
 		box.classList.remove('open');
 		document.body.style.overflow = '';
 		boxImg.removeAttribute('src');
+		boxCap.textContent = '';
 	}
 
 	box.querySelector('.pg-close').addEventListener('click', closeBox);
