@@ -29,8 +29,8 @@
 		.pg-msg { text-align: center; color: #5b6b7a; padding: 2rem 0; }
 		.pg-lightbox { position: fixed; inset: 0; z-index: 2000; background: rgba(20, 28, 36, .94); display: none; align-items: center; justify-content: center; }
 		.pg-lightbox.open { display: flex; }
-		.pg-lightbox img { max-width: 92vw; max-height: 86vh; object-fit: contain; border-radius: 4px; }
-		.pg-cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 1.6rem 1rem .8rem; color: #fff; font-size: .85rem; line-height: 1.35; background: linear-gradient(transparent, rgba(20, 28, 36, .82)); opacity: 0; transition: opacity .35s ease; pointer-events: none; }
+		.pg-lightbox img { max-width: 92vw; max-height: 72vh; margin-bottom: 7rem; object-fit: contain; border-radius: 4px; }
+		.pg-cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 1.6rem 1rem .8rem; color: #fff; font-size: .85rem; line-height: 1.35; background: linear-gradient(transparent, rgba(20, 28, 36, .82)); display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; opacity: 0; transition: opacity .35s ease; pointer-events: none; }
 		.pg-tile:hover .pg-cap, .pg-tile:focus-within .pg-cap { opacity: 1; }
 		.pg-hint { text-align: center; color: #5b6b7a; font-size: .9rem; margin: -1rem 0 1.5rem; }
 		.pg-hint .pg-hint-tap { display: none; }
@@ -40,7 +40,7 @@
 			.pg-cap { opacity: 1; }
 			.pg-zoom { display: none; }
 		}
-		.pg-lightbox-cap { position: absolute; left: 0; right: 0; bottom: 1.25rem; text-align: center; color: #fff; padding: 0 4rem; font-size: 1rem; }
+		.pg-lightbox-cap { position: absolute; left: 0; right: 0; bottom: 1.25rem; text-align: center; color: #fff; white-space: pre-line; max-width: 760px; margin: 0 auto; line-height: 1.4; text-shadow: 0 1px 3px rgba(0,0,0,.6); padding: 0 4rem; font-size: 1rem; }
 		.pg-lightbox button { position: absolute; background: none; border: 0; color: #fff; font-size: 2rem; cursor: pointer; padding: .75rem 1rem; line-height: 1; opacity: .85; }
 		.pg-lightbox button:hover { opacity: 1; }
 		.pg-close { top: .5rem; right: .75rem; }
